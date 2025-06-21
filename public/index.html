@@ -14,10 +14,10 @@
   <div id="login">
     <div id=""loginp1>
     <div class="loginB">
-      <input type="text"  id="senha" placeholder="Digite seu none aqui">
-      <input type="email" id="email" placeholder="Seu e-mail aqui">
-      <input type="password" id="senha" placeholder="Digite sua senha aqui">
-      <input type="password" id="senha" placeholder="Redigite sua senha aqui">
+      <input type="text"  id="senha" placeholder="Digite seu none aqui" required>
+      <input type="email" id="email" placeholder="Seu e-mail aqui" required>
+      <input type="password" id="senha" placeholder="Digite sua senha aqui" required>
+      <input type="password" id="senha" placeholder="Redigite sua senha aqui" required>
       <button id="loginBtn" onclick="envData()">Continuar</button>
     </div>
   </div>
@@ -138,6 +138,11 @@
 
     async function buscar() {
       const simbolo = document.getElementById('ativo').value;
+      if(simbolo.trim() = ''){
+        console.error('Dados não preenchidos');
+        alert('Preencha o ativo');
+        return;
+      }
       const resposta = await fetch('/dados', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

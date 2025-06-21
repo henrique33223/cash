@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const bcrypt = require('bcrypt');
 //@ts-ignore
 const nodemailer = require('nodemailer');
 
@@ -18,6 +19,7 @@ const key = process.env.API_KEY;
 db.run(`CREATE TABLE IF NOT EXISTS login(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     senha TEXT NOT NULL
 )`)
 db.run(`CREATE TABLE IF NOT EXISTS historicos (  
@@ -91,8 +93,36 @@ app.post('/dados', async (req, res) => {
 });
 
 const codigosPendentes = {};
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
 
+  db.get("SELECT * FROM login WHERE email = ?",[email], async (err, row) => {
+    if(err) return res.status(500).send('Erro no server');
+    if(!row) return res.status(400).send('Usuário não encontrado');
 
+    const match = await bcrypt.compare(password, row.senha);
+    if(!match) return res.status(400).send('Senha incorreta');
+
+    res.send("Login realizado com sucesso");
+  })
+});
+app.post('/salvarData', async (req, res) => {
+  const nome = req.body.nome;
+  const email = req.body.email;
+  const password = req.body.password;
+  const hashPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS||10);
+  db.run(
+    "INSERT INTO login (nome, email, senha) VALUES (?, ?, ?)",
+    [nome, email, hashPassword],
+    function(err){
+      if(err){
+        console.error(err.message);
+        return res.status(500).send("Erro ao salvar usuario");
+      }
+      res.send("Usuário salvo com sucesso");
+    }
+  )
+});
 app.post('/enviarC', (req, res) => {
   const { emailDestino } = req.body;
 
