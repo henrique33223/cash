@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <title>Teste API</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="ar">
+  <div id="login">
+    <div id=""loginp1>
+    <div class="loginB">
+      <input type="text"  id="senha" placeholder="Digite seu none aqui">
+      <input type="email" id="email" placeholder="Seu e-mail aqui">
+      <input type="password" id="senha" placeholder="Digite sua senha aqui">
+      <input type="password" id="senha" placeholder="Redigite sua senha aqui">
+      <button id="loginBtn" onclick="envData()">Continuar</button>
+    </div>
+  </div>
+  </div>
+  <div id="home">
+
+  </div>  
+  <div id="lado">
+    <div class="blocks" onclick="mudar('home')">
+      <svg id="sifra" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#ffffff">
+        <path d="M447.67-120v-84.67Q392-215.33 354.83-249q-37.16-33.67-53.83-88.33l62-25.34q16.33 48 47.5 72t77.17 24q45.66 0 75.83-22.16Q593.67-311 593.67-352T568-415.83Q542.33-438.67 465-464q-76.67-24.33-111-62.17Q319.67-564 319.67-620q0-58.33 37.66-95 37.67-36.67 90.34-41.67V-840h66.66v83.33q46.67 6 79.17 31.84Q626-699 642.33-660l-62 26.67q-13.33-32-36.33-47t-61-15q-45.33 0-71 20.5t-25.67 54.16q0 36.34 30 58.34T525-516.67q68.33 20.67 101.83 61.5 33.5 40.84 33.5 99.84 0 65.66-38.66 103.66-38.67 38-107.34 48.34V-120h-66.66Z" />
+      </svg>
+    </div>
+    <div class="blocks" onclick="mudar('search')">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+        <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+      </svg>
+    </div>
+  </div>
+<div id="search">
+  <main class="ar">
+    <div class="cont ar">
+      <div class="block">
+        <input type="text" class="minB ar" id="ativo" placeholder="Ativo a pesquisar">
+        <button class="ar btn" onclick="pegarI()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="block">
+        <div class="svg">
+          <svg xmlns="http://www.w3.org/2000/svg" height="45px" viewBox="0 -960 960 960" width="45px" fill="#000000">
+            <path d="M200-280v-280h80v280h-80Zm240 0v-280h80v280h-80ZM80-120v-80h800v80H80Zm600-160v-280h80v280h-80ZM80-640v-80l400-200 400 200v80H80Zm178-80h444-444Zm0 0h444L480-830 258-720Z" />
+          </svg>
+        </div>
+        <p>Valor médio: </p><br>
+        <div class="lB">R$<span id="medV"></span></div>
+      </div>
+
+      <div class="block">
+        <div class="svg">
+          <svg xmlns="http://www.w3.org/2000/svg" height="45px" viewBox="0 -960 960 960" width="45px" fill="#000000">
+            <path d="M200-280v-280h80v280h-80Zm240 0v-280h80v280h-80ZM80-120v-80h800v80H80Zm600-160v-280h80v280h-80ZM80-640v-80l400-200 400 200v80H80Zm178-80h444-444Zm0 0h444L480-830 258-720Z" />
+          </svg>
+        </div>
+        <p>Valor máximo: </p><br>
+        <div class="lB">R$<span id="maxV"></span></div>
+      </div>
+
+      <div class="block">
+        <div class="svg">
+          <svg xmlns="http://www.w3.org/2000/svg" height="45px" viewBox="0 -960 960 960" width="45px" fill="#000000">
+            <path d="M200-280v-280h80v280h-80Zm240 0v-280h80v280h-80ZM80-120v-80h800v80H80Zm600-160v-280h80v280h-80ZM80-640v-80l400-200 400 200v80H80Zm178-80h444-444Zm0 0h444L480-830 258-720Z" />
+          </svg>
+        </div>
+        <p>Valor mínimo: </p><br>
+        <div class="lB">R$<span id="minV"></span></div>
+      </div>
+    </div>
+
+    <div class="middle ar">
+      <div class="graf ar">
+        <canvas id="myC"></canvas>
+      </div>
+      <div class="lador ar">
+        <canvas id="meuOvo" width="250px" height="250px"></canvas>
+      </div>
+    </div>
+  </main>
+</div>
+  <script>
+    let chart = null;
+    let pds, pdd;
+
+    function prob(valores) {
+      let gd = 0;
+      let bd = 0;
+      for (let i = 0; i < valores.length - 1; i++) {
+        if (valores[i] < valores[i + 1]) {
+          gd++;
+        } else {
+          bd++;
+        }
+      }
+      pds = (gd / (valores.length - 1)) * 100;
+      pdd = (bd / (valores.length - 1)) * 100;
+    }
+    const home = document.querySelector('#home');
+    const search = document.querySelector('#search');
+    const screens = [home,search];
+    function mudar(id){
+      for(let i = 0;i<screens.length;i++){
+        if(screens[i].id == id){
+          screens[i].style.display = 'block';
+        }else {
+          screens[i].style.display = 'none';
+        }
+      }
+    }
+    function criar() {
+      const ctx1 = document.querySelector('#meuOvo').getContext('2d');
+      ctx1.clearRect(0, 0, 250, 250);
+
+      ctx1.lineWidth = 21;
+
+      ctx1.beginPath();
+      ctx1.strokeStyle = 'green';
+      ctx1.arc(125, 125, 50, 0, (360 * (pds / 100)) * (Math.PI / 180));
+      ctx1.stroke();
+
+      ctx1.beginPath();
+      ctx1.strokeStyle = 'red';
+      ctx1.arc(125, 125, 50, (360 * (pds / 100)) * (Math.PI / 180), Math.PI * 2);
+      ctx1.stroke();
+    }
+
+    async function buscar() {
+      const simbolo = document.getElementById('ativo').value;
+      const resposta = await fetch('/dados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ simbolo })
+      });
+      const json = await resposta.json();
+
+      const ctx = document.querySelector('#myC').getContext('2d');
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: json.datas,
+          datasets: [{
+            label: `Preço fechamento ${simbolo.toUpperCase()}`,
+            data: json.valores,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0,0,255,0.2)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 2,
+            pointHoverRadius: 5,
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: 'Preço (R$)'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Data'
+              }
+            }
+          },
+          plugins: {
+            legend: { display: true },
+            tooltip: { mode: 'index', intersect: false }
+          }
+        }
+      });
+
+      const maxV = document.querySelector('#maxV');
+      const minV = document.querySelector('#minV');
+      const medV = document.querySelector('#medV');
+      let max = Number.NEGATIVE_INFINITY;
+      let min = Number.POSITIVE_INFINITY;
+      let med = 0;
+
+      for (let i = 0; i < json.valores.length; i++) {
+        if (json.valores[i] > max) max = json.valores[i];
+        if (json.valores[i] < min) min = json.valores[i];
+        med += json.valores[i];
+      }
+
+      if (json.valores.length > 0) {
+        med /= json.valores.length;
+        maxV.textContent = max.toFixed(2);
+        minV.textContent = min.toFixed(2);
+        medV.textContent = med.toFixed(2);
+
+        prob(json.valores);
+        criar();
+      }
+    }
+
+    function pegarI() {
+      buscar();
+    }
+  </script>
+</body>
+
+</html>
