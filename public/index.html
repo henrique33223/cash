@@ -14,10 +14,10 @@
   <div id="login">
     <div id=""loginp1>
     <div class="loginB">
-      <input type="text"  id="senha" placeholder="Digite seu none aqui" required>
+      <input type="text"  id="nome" placeholder="Digite seu none aqui" required>
       <input type="email" id="email" placeholder="Seu e-mail aqui" required>
       <input type="password" id="senha" placeholder="Digite sua senha aqui" required>
-      <input type="password" id="senha" placeholder="Redigite sua senha aqui" required>
+      <input type="password" id="confSenha" placeholder="Redigite sua senha aqui" required>
       <button id="loginBtn" onclick="envData()">Continuar</button>
     </div>
   </div>
@@ -109,7 +109,8 @@
     }
     const home = document.querySelector('#home');
     const search = document.querySelector('#search');
-    const screens = [home,search];
+    const login = document.querySelector('#login');
+    const screens = [home,search, login];
     function mudar(id){
       for(let i = 0;i<screens.length;i++){
         if(screens[i].id == id){
@@ -134,6 +135,26 @@
       ctx1.strokeStyle = 'red';
       ctx1.arc(125, 125, 50, (360 * (pds / 100)) * (Math.PI / 180), Math.PI * 2);
       ctx1.stroke();
+    }
+    async function envData(){
+      const nome = document.querySelector('#nome').value;
+      const email = document.querySelector('#email').value;
+      const password = document.querySelector('#senha').value;
+      const confSenha= document.querySelector('#confSenha').value;
+      if(password.trim() === confSenha.trim()){
+        const response = await fetch('/salvarData', {
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json' },
+          body: JSON.stringify({ nome , email, password})
+        });
+        if(response.ok){
+          console.log('Dados salvos com sucesso');
+        }else {
+          console.log('Dados não foram salvos erro:', response.status);
+        }
+      }else {
+        return;
+      }
     }
 
     async function buscar() {

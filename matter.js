@@ -110,7 +110,8 @@ app.post('/salvarData', async (req, res) => {
   const nome = req.body.nome;
   const email = req.body.email;
   const password = req.body.password;
-  const hashPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS||10);
+  const saltRounds = parseInt(process.env.SALT_ROUNDS) || 10;
+  const hashPassword = await bcrypt.hash(password, saltRounds);
   db.run(
     "INSERT INTO login (nome, email, senha) VALUES (?, ?, ?)",
     [nome, email, hashPassword],
