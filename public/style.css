@@ -10,7 +10,7 @@
     padding: 0;
     margin: 0;
     
-} #search, #home {
+} #search, #home, #login2 {
     display:none;
 }
 #login .loginB {

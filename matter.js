@@ -16,10 +16,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const db = new sqlite3.Database('./meubanco.db');
 const key = process.env.API_KEY;
+db.run('DROP TABLE IF EXISTS login')
 db.run(`CREATE TABLE IF NOT EXISTS login(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
     senha TEXT NOT NULL
 )`)
 db.run(`CREATE TABLE IF NOT EXISTS historicos (  
@@ -30,7 +31,7 @@ db.run(`CREATE TABLE IF NOT EXISTS historicos (
     FOREIGN KEY (usuario_id) REFERENCES login(id)
 )`);
 const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
+  host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {

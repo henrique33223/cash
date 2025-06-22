@@ -14,19 +14,39 @@ function prob(valores) {
   pds = (gd / (valores.length - 1)) * 100;
   pdd = (bd / (valores.length - 1)) * 100;
 }
+
 const home = document.querySelector('#home');
 const search = document.querySelector('#search');
 const login = document.querySelector('#login');
-const screens = [home,search, login];
-function mudar(id){
-  for(let i = 0;i<screens.length;i++){
-    if(screens[i].id == id){
+const login2 = document.querySelector('#login2');
+const screens = [home, search, login];
+
+function mudar(id) {
+  for (let i = 0; i < screens.length; i++) {
+    if (screens[i].id == id) {
       screens[i].style.display = 'block';
-    }else {
+    } else {
       screens[i].style.display = 'none';
     }
   }
 }
+
+async function Login2() {
+  const email = document.querySelector('#email').value;
+  mudar('aleatorio');
+  login2.style.display = 'block';
+  const resp = await fetch('/enviarC', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ emailDestino: email })
+  });
+  if (resp.ok) {
+    console.log('email enviado com sucesso!');
+  } else {
+    console.log('erro ao enviar email/codigo');
+  }
+}
+
 function criar() {
   const ctx1 = document.querySelector('#meuOvo').getContext('2d');
   ctx1.clearRect(0, 0, 250, 250);
@@ -43,34 +63,36 @@ function criar() {
   ctx1.arc(125, 125, 50, (360 * (pds / 100)) * (Math.PI / 180), Math.PI * 2);
   ctx1.stroke();
 }
-async function envData(){
+
+async function envData() {
   const nome = document.querySelector('#nome').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#senha').value;
-  const confSenha= document.querySelector('#confSenha').value;
-  if(password.trim() === confSenha.trim()){
+  const confSenha = document.querySelector('#confSenha').value;
+  if (password.trim() === confSenha.trim()) {
     const response = await fetch('/salvarData', {
       method: 'POST',
-      headers: { 'Content-Type' : 'application/json' },
-      body: JSON.stringify({ nome , email, password})
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, password })
     });
-    if(response.ok){
+    if (response.ok) {
       console.log('Dados salvos com sucesso');
-    }else {
+    } else {
       console.log('Dados não foram salvos erro:', response.status);
     }
-  }else {
+  } else {
     return;
   }
 }
 
 async function buscar() {
   const simbolo = document.getElementById('ativo').value;
-  if(simbolo.trim() = ''){
+  if (simbolo.trim() === '') {
     console.error('Dados não preenchidos');
     alert('Preencha o ativo');
     return;
   }
+
   const resposta = await fetch('/dados', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
