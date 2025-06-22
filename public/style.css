@@ -10,10 +10,58 @@
     padding: 0;
     margin: 0;
     
-} #search, #home, #login2 {
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#search, #home, #login {
     display:none;
 }
-#login .loginB {
+#receberC {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    margin-top: 50px;
+    position: relative;
+    left: 82.5px;
+}
+#text {
+    color: gray;
+    text-align: center;
+    margin-top: 40px;
+}
+.code-input {
+    width: 50px;
+    height: 70px;
+    background-color: var(--main-bg-color);
+    color: black;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
+.code-input:hover {
+    color: white;
+    background-color: lightgray;
+    transition: .5s;
+}
+#loginBtn2 {
+    width: 150px;
+    height: 50px;
+    background-color:#3b00c4;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    position: relative;
+    left: 175px;
+    margin-top: 60px;
+    cursor: pointer;
+}
+#login .loginB,#login2 .loginB {
     width: 500px;
     height: 600px;
     background-color: white;
@@ -23,7 +71,7 @@
     top: 50%;
     transform: translate(-50%,-50%);
 }
-.loginB input {
+.loginB input:not(.code-input) {
     width: 400px;
     height: 60px;
     border-radius: 15px;
@@ -45,6 +93,17 @@
     position: relative;
     left: 175px;
     margin-top: 60px;
+    cursor: pointer;
+}
+#loginBtn:hover, #loginBtn2:hover {
+    background-color: #32059b;
+    width: 160px;
+    height: 60px;
+    position: relative;
+    left: 120px;
+    margin: 55px;
+    color: white;
+    transition: .5s;
 }
 .ar {
     font-family: "Anton", sans-serif;
