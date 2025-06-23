@@ -1,6 +1,5 @@
 let chart = null;
 let pds, pdd;
-
 function prob(valores) {
   let gd = 0;
   let bd = 0;
@@ -30,7 +29,14 @@ function mudar(id) {
     }
   }
 }
+function aa(){
+  mudar('aleatorio');
+  login2.style.display = 'block';
+}
+function validacao(){
 
+}
+let codigo = null;
 async function Login2() {
   const email = document.querySelector('#email').value;
   mudar('aleatorio');
@@ -45,6 +51,9 @@ async function Login2() {
   } else {
     console.log('erro ao enviar email/codigo');
   }
+  const respJson = await resp.json();
+  codigo = respJson.codigo;
+  
 }
 
 function criar() {
@@ -83,6 +92,23 @@ async function envData() {
   } else {
     return;
   }
+}
+
+async function validarC(){
+  const email = document.querySelector('#email').value;
+    console.log(email, codigo);
+    const re = await fetch('/validarC', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ emailDestino: email, codigoEnviado: codigo })
+    });
+    const jj = await re.json();
+    if(jj.result){
+      envData();
+      mudar('home');
+    }else {
+      alert('Código inválido');
+    }
 }
 
 async function buscar() {

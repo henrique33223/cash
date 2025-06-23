@@ -149,20 +149,23 @@ app.post('/enviarC', (req, res) => {
     }
   })
 
-
+  res.json({ codigo });
 });
 
 
-app.post('/validarC', (req,res) => {
-  const {emailDestino, codigoEnviado} = req.body;
+app.post('/validarC', (req, res) => {
+  const { emailDestino, codigoEnviado } = req.body;
+  console.log('Recebido:', emailDestino, codigoEnviado);
+  console.log('Código salvo no backend:', codigosPendentes[emailDestino]);
 
-  if(codigosPendentes[emailDestino] && codigosPendentes[emailDestino].toString() === codigoEnviado.toString()){
+  if (codigosPendentes[emailDestino] && codigosPendentes[emailDestino].toString() === codigoEnviado.toString()) {
     delete codigosPendentes[emailDestino];
-    res.send('Código validado com sucesso!');
-  }else {
-    res.status(400).send('Código inválido');
+    return res.json({ result: true, message: 'Código validado com sucesso!' });
+  } else {
+    return res.status(400).json({ result: false, message: 'Código inválido' });
   }
 });
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
