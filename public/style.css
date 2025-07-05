@@ -29,6 +29,42 @@ input::-webkit-inner-spin-button {
     position: relative;
     left: 82.5px;
 }
+.errorBlock {
+    width: 450px;
+    height: 70px;
+    position: absolute;
+   right: 25px;
+   top: 25px;
+    background-color: lightcoral;
+    border-radius: 15px;
+    display: none;
+    
+}
+.errorBlock p {
+    font-size: 15px;
+    position: relative;
+    left: 15px;
+    top: 23px;
+    width: 300px;
+}
+.errorBlock button {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 30px;  
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    left: 390px;
+    top: 35px;
+    transform: translateY(-50%);
+}
+.errorBlock button:hover {
+    background-color: rgb(190, 18, 18);
+    transition: .5s;
+}
 #text {
     color: gray;
     text-align: center;

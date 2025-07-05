@@ -73,7 +73,17 @@ function criar() {
   ctx1.arc(125, 125, 50, (360 * (pds / 100)) * (Math.PI / 180), Math.PI * 2);
   ctx1.stroke();
 }
-
+function err(txt){
+  const p = document.querySelector('#PPP');
+  const errB = document.querySelector('.errorBlock');
+  
+  p.textContent = txt;
+  errB.style.display = 'block';
+}
+function retireErr(){
+  const errB = document.querySelector('.errorBlock');
+  errB.style.display = 'none';
+}
 async function envData() {
   const nome = document.querySelector('#nome').value;
   const email = document.querySelector('#email').value;
@@ -117,7 +127,7 @@ async function validarC(){
       Login2.style.dispay = 'none';
       mudar('home');
     }else {
-      alert('Código inválido');
+      err('Código inválido');
     }
 }
 
@@ -125,7 +135,7 @@ async function buscar() {
   const simbolo = document.getElementById('ativo').value;
   if (simbolo.trim() === '') {
     console.error('Dados não preenchidos');
-    alert('Preencha o ativo');
+    err('Preencha o ativo');
     return;
   }
 
